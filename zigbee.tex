@@ -432,7 +432,7 @@
 \author{\IEEEauthorblockN{Priscilla~Piedra y Martín~Flores}\\
         \IEEEauthorblockA{
         Escuela de Ingeniería en Computación\\
-        Instituto Tecnológico de Costa Rica. Cartago, Costa Rica
+        Tecnológico de Costa Rica. Cartago, Costa Rica
         }\\
         \small{\texttt{\{ppiedra90, mfloresg\}}\texttt{@gmail.com}}% <-this % stops a space
 \thanks{Este documento fue realizado durante el curso Redes de Computadoras Avanzadas, impartido por el profesor Luis Carlos Loaiza Canet. Programa de Maestría en Computación, Instituto Tecnológico de Costa Rica. Segundo Semestre, 2017.}
@@ -550,11 +550,14 @@
 % 
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{L}{as} Introducción
+\IEEEPARstart{L}{as}
 
-\section{Breve reseña} 
 
 \section{ZigBee}
+
+\textbf{PRISCILLA}
+%Yo ya tenia una parte introductoria desarrollada y no la quise perder asi que se la puse a su parte de introducción. Considero que no está completa era solo para iniciar.
+
 ZigBee es un estándar desarrollado por la \emph{ZigBee Alliance} para redes de área personal (PAN por sus siglas en inglés). Conformada por más de 270 compañías, la \emph{ZigBee Alliance} es un consorcio que promueve el estándar ZigBee para sensores inalámbricos y dispositivos de red de baja potencia y velocidad. El protocolo ZigBee está construido por encima del protocolo IEEE 802.15.4 el cual define la dirección MAC y las capas físicas para redes de área personal inalámbricas de bajo consumo (LR-WPAN). El estándar ZigBee ofrece un conjunto de perfiles que definen las capas de red, seguridad y aplicación. Los desarrolladores son responsables de crear sus propios perfiles de aplicación o de la integración con los perfiles públicos que fueron desarrollados por la \emph{ZigBee Alliance}. La especificación ZigBee es un estándar abierto que permite a los fabricantes desarrollar sus propias aplicaciones específicas que requieran de bajo costo y consumo de energía.
 
 La especificación ZigBee ha sufrido varias modificaciones desde la publicación de la primera especificación en el 2004:
@@ -564,6 +567,64 @@ La especificación ZigBee ha sufrido varias modificaciones desde la publicación
     \item En Octubre del 2007, la \emph{ZigBee Alliance} publica dos conjuntos de funcionalidades llamados ZigBee y ZigBee PRO. El conjunto de funcionalidad ZigBee es interoperable con ZigBee PRO. Si una red está basada en el ZigBee PRO, los dispostivos de ZigBee pueden unirse a la red como dispositivos finales (\emph{end devices}). De la misma forma si una red está basada en ZigBee, los dispositivos ZigBee PRO puede unirse a la red como dispositivos finales.
 \end{itemize}
 
+\subsection{Características}
+
+\paragraph*{Confianza} A pesar de que las redes wireless son poco confiables donde factores como el ambiente, altura, ubicación representan problemas de comunicación a causa de una recepción pobre. ZigBee provee mediante protocolos (IEEE 802.15.4, CSMA-CA, etc) confianza en la red. Para aumentar la misma ZigBee implementa un CSMA-CA (\emph{Carries Sense Multiple Access Collition Avoidance}) que establece el proceso de comunicación: antes de transmitir ZigBee escucha el canal, cuando el canal esta claro ZigBee comienza a transmitir.
+
+
+
+\section{Red ZigBee}
+\subsection{Estándar  802.15.4}
+
+La IEEE 802.15.4 es una tecnología wireless  estándar para redes de bajo alcance moderna y robusta creada por la IEEE que utiliza O-QPSK (Offset-Quadature Phase-Shift Keying) y DSSS (Direct Sequence Spread Spectrum) las cuales son tecnologías que proveen un buen rendimiento en ambientes de baja señal. Propone ofrecer capas fundamentales de red wirless WPAN que se basa en el bajo costo, baja velocidad ubicua entre dispositivos. Se enfoca en el bajo costo de comunicación entre dispositivos cercanos permitiendo una cobertura de 10 metros de rango con un rango de transferencia de 250 kbits/s. 
+
+El estándar define dos tipos de nodos para las redes: FFD (full-function device) el cual puede servir como coordinador de una área de network personal, implementa un modelo general de comunicación que permite establecer una relación entre otros dispositivos y RFD (reduced-function devices) el cual se implementa en dispositivos simples con recursos y requerimientos de comunicación modestos, por esta razón no pueden tener el rol de coordinadores. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm]{diseno_redes}
+    \caption{Diseño de redes. Fuente: \emph{Wikipedia}}
+    \label{fig:sdn-arquitectura}
+\end{figure}
+
+El estándar establece dos formas de diseñar redes: peer-to-peer y de estrella. Toda red ocupa por lo menos un coordinador FFD. Las redes peer-to-peer pueden formar patrones arbitrarios de conexiones y la extinción es solo limitada por la distancia entre los pares de nodos. Por otro lado una red estrella es mas estructurada donde el coordinador de la red necesita ser el nodo central.
+
+El atractivo de ZigBee es la confianza que brinda a pesar de que construye una red wirless y parte del porque es la implementación del estándar IEEE 802.15.4. Al ser un estándar hay certificaciones de dicho estándar y de ZigBee lo cual le brinda a la comunidad un ambiente robusto para el desarrollo de este tipo de redes.
+
+
+También ZigBee implementa una solución de dos SAPs por capa una para la data y otra para la administración, esto según las especificaciones del protocolo 802.15.4, lo mismo ocurre en las capas inferiores MAC y PHY donde se define un radio de 2.4 GHz como base de las comunicaciones que permite, por ejemplo un nodo que controla o monitorea un grupo de interruptores solo va a necesitar un radio 802.15.4. (SAPs).
+
+\subsection{Tipos de Red}
+
+\textbf{Priscilla lo hace}
+
+\section{Tipos de dispositivos}
+
+\textbf{Martin lo hace}
+
+\section{Topologias}
+
+\textbf{Martin lo hace}
+
+
+\section{Servicios ZeegBee}
+
+\textbf{Lo vamos a desarrollar???}
+
+\subsection{ZigBee Device Object (ZDO)}
+\subsection{ZigBee Device Profile (ZDP)}
+\subsection{Zigbee Cluster Library (ZCL)}
+
+\section{Otras tecnologías wireless}
+ZigBee esta bien posicionado en el area de sensores wireless y cntrol de redes pero existen otras soluciones wirless que al igual que ZigBee utilizan el protocolo 82.15.4:
+
+\begin{itemize}
+  \item \textbf{Wirless USB:} es una tecnología emergente de dispositivos operados por batería. Es una tecnología poco costosa, genial para las baterías pero no funciona bien en gran escala y noo provee seguridad. Esta basada en Ultra Wideband (UWB) ultizada mayormente en baterías de dispositivos periféricos para PC.
+  \item \textbf{WiFi:} se utiliza en sensores y control de redes, es una tecnología que comenzó con el mercado de PCs pero comienza a ganar terreno en el área de los dispositivos. Es mas cara que ZigBee donde WiFi requiere de un equipo mayor para correr todo el protocolo. 
+  \item \textbf{Bluetooth:} Es un protocolo seguro, utilizado en celulares, wearables como relojes, audífonos y demás, no es una tecnología cara  pero no tiene la misma capacidad de batería que un dispositivo ZigBee.Bluetooth tiene otra limitante: no escala bien en redes amplias, siendo solo aplicable en redes de no mas de siete dispositivos.
+  \item \textbf{Wibree:} Utilizado en relojes y sensores de movimiento para el cuerpo. Esta diseñada para ser de bajo consumo de poder pero, esta limitada por el numero de nodos que pueden haber en una red. Es una tecnología que sigue en desarrollo. 
+  \item \textbf{Z-Wave}: Tecnología utilizada para la automatización de casas, no posee un estándar pues la compañía Zensys es la única que manufactura componentes Z-Wave. Es el competidor directo de ZigBee. 
+\end{itemize}
 
 
 % needed in second column of first page if using \IEEEpubid
@@ -745,29 +806,9 @@ La especificación ZigBee ha sufrido varias modificaciones desde la publicación
 \begin{thebibliography}{1}
 
 \bibitem{bombal}
-D.~Bombal. \emph{Software Defined Networking(SDN)}. \hskip 1em plus 0.5em minus 0.4em\relax Infinite Skills. ISBN: 9781491976593. Febrero, 2017.
+D.~Gislason. \emph{Zigbee Wirless Networking}. \hskip 1em plus 0.5em minus 0.4em\relax Elsevier. ISBN: 978-0-7506-85979. 2008.
 
-\bibitem{onf}
-Open Networking Foundation. \url{https://www.opennetworking.org/sdn-definition/}
 
-\bibitem{onf2}
-Open Networking Foundation. \emph{Software-Defined Networking: The new Norm for Networks}.\hskip 1em plus 0.5em minus 0.4em\relax White Paper. Abril, 2012.
-
-\bibitem{rexford}
-N.~ Feamster, J.~Rexford, and E.~Zegura. 2013. \emph{The Road to SDN}.\hskip 1em plus
-  0.5em minus 0.4em\relax Queue 11, 12. December 2013.
-  
-\bibitem{goransson}
-P.~Goransson and C.~Black. \emph{Software Defined Networks: A Comprehensive Approach}.\hskip 1em plus 0.5em minus 0.4em\relax Elsevier Science. 2016.
-
-\bibitem{slattery}
-T.~Slattery. \emph{An Introduction to Software Defined Networking (SDN) LiveLessons—Networking Talks}.\hskip 1em plus 0.5em minus 0.4em\relax Pearson IT Certification. ISBN: 0133987337. Junio, 2014.
-
-\bibitem{slattery}
-Network Startup Resource Center. \emph{Introduccion a OpenFlow}. Disponible en \url{https://nsrc.org/workshops/2015/walc/routing/raw-attachment/wiki/Agenda/15-Introducci\%C3\%B3n-SDN-Openflow.pdf}
-
-\bibitem{slattery}
-M.~McNickle. \emph{Cinco protocolos SDN que no son OpenFlow}.\hskip 1em plus 0.5em minus 0.4em\relax TechTarget.
 
   
 \end{thebibliography}
