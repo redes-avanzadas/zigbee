@@ -362,6 +362,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
+\usepackage{booktabs}
 \graphicspath{ {images/} }
 
 
@@ -484,7 +485,10 @@
 % in the abstract or keywords.
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-[Aquí va el resumen]
+ZigBee es un estándar basado en IEEE 802.15.4 para redes de área personal. Este estándar permite la creacio4n de redes de bajo costo y consumo de energía. Estas redes son creadas a partir de sensores y dispositivos de bateria limitada y pueden controlar inalámbricamente muchos productos eléctricos tales como controles remotos, sensores médicos, industriales y de seguridad. En este reporte se brinda una introducción al estándar y a sus conceptos principales. 
+
+
+
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -598,28 +602,190 @@ También ZigBee implementa una solución de dos SAPs por capa una para la data y
 
 \textbf{Priscilla lo hace}
 
-\section{Tipos de dispositivos}
+\subsection{Tipos de dispositivos}
+Una red ZigBee consiste de nodos ZigBee (dispositivos). La arquitectura de un nodo se muestra en la figura \ref{fig:device-architecture}. Un nodo consiste de un microcontrolador, un tranceptor (\emph{transciver}) y una antena. Un nodo ZigBee usa conjuntos de perfiles los cuales son desarrollados en software. Un nodo puede ser usado para una amplia variedad de aplicaciones, por ejempo, control de la iluminación, detectores de humo y monitoreo doméstico de seguridad. Por lo tanto, un nodo puede soportar múltiples subunidades y cada subunidad tiene un objecto de aplicación que describe la función de la subunidad. Un nodo puede operar ya sea como un \emph{full-function device} (FFD) o como un \emph{reduced-function device} (RFD). Un FFD puede realizar todas las tareas que están definidades por el estándar ZigBee y, opera en todo el conjunto de la capa MAC de IEEE 802.15.4. Un RFD realiza solo un número limitado de tareas.
 
-\textbf{Martin lo hace}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm]{device-architecture}
+    \caption{Arquitectura de un nodo ZigBee}
+    \label{fig:device-architecture}
+\end{figure}
 
-\section{Topologias}
+\begin{itemize}
+    \item \textbf{Coordinador:} un coordinador es un FFD responsable de la gestión global de la red. Cada red tiene exactamente un coordinador. El coordinador realiza las siguientes funciones:
+    \begin{itemize}
+        \item Selecciona el canal que va a ser usado por la red
+        \item Inicia la red
+        \item Asigna cómo las direcciones serán reservadas por nodos o \emph{routers}
+        \item Permite a otros dispositivos unirse o dejar la red
+        \item Mantiene una lista de vecinos y \emph{routers}
+        \item Transfiere paquetes de aplicación
+    \end{itemize}
+    \item \textbf{Dispositivo final (\emph{End device:})} un dispositivo final puede ser un RFD. Un RFD opera dentro de un conjunto limitado de la capa MAC de IEEE 802.15.4, permitiéndole consumir menor energía. El dispositivo final (\emph{child}) se puede conectar a un \emph{router} o a un coordinador (\emph{parent}). También opera a una baja potencia de ciclo de trabajo, lo que significa que consume energía solo mientras transmite información. Por lo tanto, la arquitectura ZigBee está diseñada de tal forma que el tiempo de transmisión de dispositivo final sea corto. Un dispositivo final realiza las siguientes funciones:
+    \begin{itemize}
+        \item Se une o deja una red
+        \item Transfiere paquetes de aplicación
+    \end{itemize}
+    \item \textbf{\emph{Router}:} un \emph{router} es un FFD. Un \emph{router} es usado en un topologías de árbol y malla (\emph{mesh}) para expandir la cobertura de la red. La función de un \emph{router} es encontrar la mejor ruta al destino para transferir un mensaje. Un \emph{router} realiza todas las funciones similares de un coordinador excepto el establecimiento de una red.
+    \item \textbf{\emph{ZigBee trust center (ZTC)}:} el ZTC es un dispositivo que provee gestión de seguridad, distribución segura de llaves y autenticación de dispositivos.
+    \item \textbf{\emph{ZigBee gateway}:} El \emph{ZigBee gateway} es usado para conectar la red ZigBee con otra red tal y como una LAN, por medio de la conversión de protocolos.
+\end{itemize}
 
-\textbf{Martin lo hace}
+
+\subsection{Topologias}
+ZigBee usa la especificación 802.15.4 para su capa física y capa MAC. IEEE 802.15.4 ofrece topologías de estrella, árbol, \emph{cluster tree} y malla; sin embargo, ZigBee soporta solo topologías de estrella, árbol y malla.
+
+Se utiliza una jerarquía de asociación; un dispositivo que se une a la red puede ser \emph{router} o un dispositivo final, y los \emph{routers} pueden aceptar más dispositivos.
+
+\begin{itemize}
+    \item \textbf{Topología de estrella:} La topología de estrella consiste de un coordinador y varios dispositivos (nodos), como se muestra en la figura \ref{fig:star-topology}. En esta topología, el dispositivo final se comunica solamente con el coordinador. Cualquier intercambio de paquetes entre dispositivos finales debe ir a través del coordinador. La desventaja de esta topología es que la operación de la red depende del coordinador de la red y, debido a que todos los paquetes entre los dispositivos deben de pasar a través del coordinador, el coordinador se convierte en un cuello de botella. También, no hay ruta alterna desde el origen hacia el destino. La ventaja de la topología de estrella es que es simple y que los paquetes viajan realizan a lo sumo dos saltos para llegar a su destino.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=7.5cm]{star-topology}
+        \caption{Topología de estrella}
+        \label{fig:star-topology}
+    \end{figure}
+    \item \textbf{Topología de árbol:} En esta topología, la red consiste de un nodo central (nodo raíz), el cual es un coordinador, varios \emph{routers} y dispositivos finales tal y como se muestra en la figura \ref{fig:tree-topology}. La función del \emph{router} es la de extender la cobertura de la red. Los nodos finales que están conectados al coordinador o a los \emph{routers} se les llama \emph{children}. Solamente los \emph{routers} y el coordinador pueden tener  hijos \emph{children}. Cada dispositivo final está solamente en la capacidad de comunicarse con su padre (\emph{router} o coordinador). El coordinador y los \emph{routers} puede tener hijos y, por tanto, son los únicos dispositivos que pueden ser padres. Un dispositivo final no puede tener hijos y por lo tanto, no puede ser un padre. Un caso especial de topología de árbol es la llamada topología \emph{cluster tree}.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=7.5cm]{tree-topology}
+        \caption{Topología de árbol}
+        \label{fig:tree-topology}
+    \end{figure}    
+    Las desventajas de una topología de árbol son:
+    \begin{itemize}
+        \item[a.] Si uno de los padres está deshabilitado, los hijos del padre deshabilitado no van a poder comunicarse con otros dispositivos en la red. 
+        \item[b.] Incluso si dos nodos están geográficamente cerca el uno del otro, estos no se van a poder comunicar directamente.
+    \end{itemize}
+    \item \textbf{\emph{Cluster tree topology}:} Una topología \emph{cluster tree} es un caso especial de la topología de árbol en donde a un padre con sus hijos se le llama un \emph{cluster}, tal y como se muestra en la figura \ref{fig:cluster-tree-topology}. Cada \emph{cluster} se identifica por un \emph{cluster} ID. ZigBee no soporta la topología \emph{cluster tree} pero IEEE 802.15.4 sí la soporta.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=7.5cm]{cluster-tree-topology}
+        \caption{Topología \emph{cluster tree}}
+        \label{fig:cluster-tree-topology}
+    \end{figure}
+    \item \textbf{Topología de malla:}  la topología de malla, también conocida como una red punto-a-punto, consiste de un coordinador, varios \emph{routers} y dispositivos finales, como se muestra en la figura \ref{fig:mesh-topology}.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=7.5cm]{mesh-topology}
+        \caption{Topología de malla}
+        \label{fig:mesh-topology}
+    \end{figure}
+    Las siguientes son las características de una topología de malla:
+    \begin{itemize}
+        \item Una topología de malla es una red multisalto (\emph{multihop}), los paquetes pasan a través de varios saltos para alcanzar su destino.
+        \item El rango de una red puede ser incrementado al añadir más dispositivos a la red.
+        \item Se pueden eliminar las zonas muertas.
+        \item Una topología de malla previene errores, lo que significa que durante una transmisión si una ruta falla, el nodo encontrará una ruta alterna al destino. 
+        \item Los dispositivos pueden estar cerca el uno del otro de esta forma usan menos energía.
+        \item Agregar o remover dispositivos es fácil.
+        \item Un dispositivo se puede comunicar con cualquier otro en la red.
+        \item Comparado con la topología de estrella, la topología de malla requiere mayor sobrecarga (\emph{overhead}).
+        \item El enrutamiento en malla usa un protocolo de enrutamiento más complejo que una topología de estrella.
+    \end{itemize}    
+\end{itemize}
+
+\subsection{Direccionamiento de dispositivos finales (nodos)}
+Cuando un dispositivo se une a una red ZigBee, el coordinador ZigBee o el \emph{router} asigna un dirección lógica de 16 bits al dispositivo. También, cada dispositivo tiene una dirección IEEE de 64 bits y no hay dos dispositivos que tengan la misma dirección IEEE en el mundo entero. Las direcciones cortas (16 bits) pueden ser utilizadas por los dispositivos en la red. La ventaja de usar direcciones de 16 bits es la de extender la vida de la bateria. Una dirección de 16 bits reduce el tamaño del marco (\emph{frame}). Un tamaño de marco menor da como resultado un tiempo de transmisión más corto. Un tiempo de transmisión menor significa un mayor tiempo de bateria. La desventaja de usar una dirección de 16 bits es que dos nodos en redes diferentes pueden tener la misma dirección.
+
+\subsection{Profundidad de una red, número de hijos y asignación de direcciones en la red}
+
+\paragraph*{\textbf{Profundidad de una red}} La profundidad de una red está determinada por el número de \emph{routers} (saltos -- \emph{hops}) desde el coordinador hacia el dispositivo más lejano, en donde la lejanía se define por el número de saltos. En una topología de estrella, la profundidad de la red es uno.
+
+\paragraph*{\textbf{Número de hijos}} El número de dispositivos finales (hijos) que estan conectados al \emph{router} o coordinador. El coordinador establece el número máximo de hijos conectados al \emph{router}. 
+
+\paragraph*{\textbf{Asignación de direcciones}} En una topología estrella, cada coordinador mantiene información acerca de la red, tal y como el número máximo de hijos, el número máximo de \emph{routers} y usa esta información para asignar una dirección a cada \emph{router}. Los \emph{routers}, entonces assignan las direcciones a sus dispositivos respectivos. Sin embargo, en una topologia de malla, cada \emph{router} asigna una dirección aleatoria a sus respectivos dispositivos finales.
+
+\subsection{Arquitectura del protocolo ZigBee}
+La figura \ref{fig:zigbee-architecture} muestra la arquitectura del protocolo ZigBee. La \emph{ZigBee Alliance} desarrolló el \emph{ZigBee device object} (ZDO), la subcapa de soporte de aplicación (APS por sus siglas en inglés), la capa de red y la gestión de la seguridad. IEEE 802.15.4 es utilizada para la capa MAC y la capa física. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm]{zigbee-architecture}
+    \caption{Arquitectura del protocolo ZigBee}
+    \label{fig:zigbee-architecture}
+\end{figure}
+
+La arquitectura del protocolo ZigBee está dividio en tres secciones:
+\begin{enumerate}
+    \item IEEE 802.15.4, que consiste de las capas MAC y física.
+    \item Capas ZigBee, que consiste de la capa de red, el ZDO, la subcapa de aplicación y la gestión de la seguridad.
+    \item Aplicación del fabricante: fabricantes de dispositivos ZigBee puede usasr el perfil de aplicación ZigBee o desarrollar su propio perfil de aplicación.
+\end{enumerate}
+
+\subsubsection{La capa física}
+La capa física realiza modulación de las señales salientes y desmodulación de las señales entrantes. Transmite y recibe información desde una fuente. La tabla \ref{table:1} muestra la banda de frecuencia de la capa física, tasa de banda (\emph{band rate}) y el número de canal.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{llcl}
+        \toprule[1.5pt]
+        Banda frecuencia & País & Tasa de banda & Números de canal\\
+        \midrule
+        868.3 MHz & Países europeos & 20Kbps & 0 \\
+        902-928 MHz & USA & 40 Kbps & 1 - 10 \\
+        2.405 MHz & Global & 250 Kbps & 11 - 26 \\
+        \bottomrule[1.5pt]
+    \end{tabular}
+    \caption{Banda de frecuencia de la capa física}
+    \label{table:1}
+\end{table}
+
+\subsubsection{Capa Media Access Control (MAC)}
+Las funciones de la capa MAC son acceder a la red usando \emph{carrier-sense multiple access with collision avoidance} (CSMA/CA), para transmisión de marcos \emph{beacon (beacon frames)} para sincronización, y proveer una transmisión confiable.
+
+\subsubsection{Capa de red}
+La capa de red está localizada entre la capa MAC y la subcapa de soporte de aplicación. Provee las siguientes funciones:
+\begin{itemize}
+    \item Iniciar una red
+    \item Gestión de los dispositivos finales que se unen o dejan la red
+    \item Descubrimiento de rutas
+    \item Descubrimiento de vecinos
+\end{itemize}
+
+\subsubsection{Subcapa de soport de aplicación (APS)}
+La subcapa de soporte de aplicación (APS) proporciona los servicios necesarios para los objetos de aplicación (\emph{endpoints}) y el \emph{ZigBee device object} (ZDO) para interactuar con la capa de red para datos y gestión de servicios. Algunos de los servicios proporcionados por la APS a los objectos de aplicación para transferencia de datos son \emph{request, confirm \textnormal{y} response.} Además, la APS provee comunicación para las aplicaciones al definir una estructura de comunicación unificada (por ejemplo, un perfil, \emph{cluster}, o \emph{endpoint}).
+
+\subsubsection{Objecto de aplicación (endpoint)}
+Un objeto de aplicación define la entrada y salida del APS. Por ejemplo, un \emph{switch} que controla una luz es la entrada para el objeto de aplicación, y la salida es la condición de la bombilla. Cada nodo puede tener 240 objetos de aplicación separados. Un objeto de aplicación también puede ser conocido también como un \emph{endpoint}(EP). La figura \ref{fig:home-control-lighting} muestra un ejemplo de control de iluminación doméstico.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm]{home-controlling-lighting}
+    \caption{Control de iluminación doméstico}
+    \label{fig:home-control-ligthing}
+\end{figure}
+
+\paragraph{\emph{ZigBee device object} (ZDO)} un dispositivo ZigBee realiza control y administración de objetos de aplicación. El ZDO realiza tareas de gestión global de dispositivos:
+\begin{itemize}
+    \item Determina el tipo de dispositivo en una red (por ejemplo, un dispositivo final, \emph{router} o coordinador).
+    \item Inicializa el APS, la capa de red, y el proveedor de servicios de seguridad.
+    \item Realiza descubrimiento de dispositivos y servicios.
+    \item Inicializa el coordinador para el establecimiento de una red.
+    \item Gestión de seguridad.
+    \item Gestión de la red.
+\end{itemize}
+
+\paragraph{Nodo final} Cada nodo o dispositivo final puede tener múltiples EPs. Cada EP contiene un perfil de aplicación, tal y como automatización del hogar, y puede ser usado para controlar varios dispositivos o uno solo. Cada EP define funciones de comunicación dentro de un dispositivo. Como se muestra en la figura \ref{fig:home-control-ligthing}, el \emph{switch} de la habitación controla la iluminación de la habitación y el control remoto es utilizado para controlar tres luces: habitación, pasillo1 y pasillo2.
+
+\paragraph{Modo de direccionamiento ZigBee}
+ZigBee usa direccionamiento directo, agrupado y de emisión (\emph{broadcast}) para la transmisión de información. In direccionamiento directo, dos dispositivos se comunican directamente entre sí. Esto requiere que el dispositivo fuente tenga ambos, la dirección y el \emph{endpoint} del dispositivo destino. El direccionamiento agrupado requiere que la applicación asigne un grupo de miembros a uno o más dispositivos. Un paquete es transmitido al grupo de direcciones en donde el dispositivo destino reside. La dirección \emph{broadcast} es usada para enviar un paquete a todos los dispositivos de la red. 
 
 
-\section{Servicios ZeegBee}
-
-\textbf{Lo vamos a desarrollar???}
-
-\subsection{ZigBee Device Object (ZDO)}
-\subsection{ZigBee Device Profile (ZDP)}
-\subsection{Zigbee Cluster Library (ZCL)}
+%\section{Servicios ZeegBee}
+%
+%\textbf{Lo vamos a desarrollar???}
+%
+%\subsection{ZigBee Device Object (ZDO)}
+%\subsection{ZigBee Device Profile (ZDP)}
+%\subsection{Zigbee Cluster Library (ZCL)}
 
 \section{Otras tecnologías wireless}
 ZigBee esta bien posicionado en el area de sensores wireless y cntrol de redes pero existen otras soluciones wirless que al igual que ZigBee utilizan el protocolo 82.15.4:
 
 \begin{itemize}
-  \item \textbf{Wirless USB:} es una tecnología emergente de dispositivos operados por batería. Es una tecnología poco costosa, genial para las baterías pero no funciona bien en gran escala y noo provee seguridad. Esta basada en Ultra Wideband (UWB) ultizada mayormente en baterías de dispositivos periféricos para PC.
+  \item \textbf{Wireless USB:} es una tecnología emergente de dispositivos operados por batería. Es una tecnología poco costosa, genial para las baterías pero no funciona bien en gran escala y noo provee seguridad. Esta basada en Ultra Wideband (UWB) ultizada mayormente en baterías de dispositivos periféricos para PC.
   \item \textbf{WiFi:} se utiliza en sensores y control de redes, es una tecnología que comenzó con el mercado de PCs pero comienza a ganar terreno en el área de los dispositivos. Es mas cara que ZigBee donde WiFi requiere de un equipo mayor para correr todo el protocolo. 
   \item \textbf{Bluetooth:} Es un protocolo seguro, utilizado en celulares, wearables como relojes, audífonos y demás, no es una tecnología cara  pero no tiene la misma capacidad de batería que un dispositivo ZigBee.Bluetooth tiene otra limitante: no escala bien en redes amplias, siendo solo aplicable en redes de no mas de siete dispositivos.
   \item \textbf{Wibree:} Utilizado en relojes y sensores de movimiento para el cuerpo. Esta diseñada para ser de bajo consumo de poder pero, esta limitada por el numero de nodos que pueden haber en una red. Es una tecnología que sigue en desarrollo. 
@@ -803,10 +969,16 @@ ZigBee esta bien posicionado en el area de sensores wireless y cntrol de redes p
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
+
+
 \begin{thebibliography}{1}
 
 \bibitem{bombal}
-D.~Gislason. \emph{Zigbee Wirless Networking}. \hskip 1em plus 0.5em minus 0.4em\relax Elsevier. ISBN: 978-0-7506-85979. 2008.
+D.~Gislason. \emph{Zigbee Wireless Networking}. \hskip 1em plus 0.5em minus 0.4em\relax Elsevier. ISBN: 978-0-7506-85979. 2008.
+
+
+\bibitem{gshewender}
+A.~Gschwender, A.~Elahi. \emph{Zigbee Wireless Sensor and Control Network}. \hskip 1em plus 0.5em minus 0.4em\relax Prentice Hall. ISBN: 9780137134854. 2009.
 
 
 
