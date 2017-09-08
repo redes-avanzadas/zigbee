@@ -554,24 +554,15 @@ ZigBee es un estándar basado en IEEE 802.15.4 para redes de área personal. Est
 % 
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{L}{as}
+\IEEEPARstart{E}{n} 1901 se crea la radio, siendo este el primer medio de comunicación de forma inalámbrica, anos mas tarde daría paso al  inicio de las redes móviles. 
+
+Con el paso del tiempo se ha demostrado la importancia de los sistemas inalámbricos y que estos puedan manejar grandes cantidades de ancho de banda, movilidad y comunicación desde cualquier lugar. 
+Las redes inalámbricas han traído grandes beneficios como tener un gran numero de suscriptores, uso adecuado del espectro electromagnético pues se pueden utilizar las mismas frecuencias, compatibilidad entre dispositivos y manejo de datos, voz y vídeo. Esto abre camino al desarrollo de la \emph{IoT} o \emph{Internet of things} que fue construido con la idea de crear interconexión entre los objetos cotidianos con las redes, permitiendo por ejemplo controlar dispositivos como el sistema de luces de una casa a través de la red. 
+
+De acá surge la necesidad de tener un conjunto de especificaciones estándar para poder comunicar varios dispositivos sin mayor problema donde la comunicación fluida entre ellos sea el objetivo principal. 
 
 
 \section{ZigBee}
-
-%ZigBee es un estándar desarrollado por la \emph{ZigBee Alliance} para redes de área personal (PAN por sus siglas en inglés). Conformada por más de 270 compañías, la \emph{ZigBee Alliance} es un consorcio que promueve el estándar ZigBee para sensores inalámbricos y dispositivos de red de baja potencia y velocidad. El protocolo ZigBee está construido por encima del protocolo IEEE 802.15.4 el cual define la dirección MAC y las capas físicas para redes de área personal inalámbricas de bajo consumo (LR-WPAN). El estándar ZigBee ofrece un conjunto de perfiles que definen las capas de red, seguridad y aplicación. Los desarrolladores son responsables de crear sus propios perfiles de aplicación o de la integración con los perfiles públicos que fueron desarrollados por la \emph{ZigBee Alliance}. La especificación ZigBee es un estándar abierto que permite a los fabricantes desarrollar sus propias aplicaciones específicas que requieran de bajo costo y consumo de energía.
-%
-%La especificación ZigBee ha sufrido varias modificaciones desde la publicación de la primera especificación en el 2004:
-%\begin{itemize}
-%    \item En el 2004, la \emph{ZigBee Alliance} publica la primera especificación, la cual daba soporte a un perfil de iluminación de control doméstico. Sin embargo, la \emph{Zigbee Alliance} ya no da soporte a la especificación del 2004.
-%    \item En Febrero del 2006, la \emph{ZigBee Alliance} publicón el \emph{ZigBee Stack 2016}, el cual contenía modificaciones del ZigBee 2004.
-%    \item En Octubre del 2007, la \emph{ZigBee Alliance} publica dos conjuntos de funcionalidades llamados ZigBee y ZigBee PRO. El conjunto de funcionalidad ZigBee es interoperable con ZigBee PRO. Si una red está basada en el ZigBee PRO, los dispostivos de ZigBee pueden unirse a la red como dispositivos finales (\emph{end devices}). De la misma forma si una red está basada en ZigBee, los dispositivos ZigBee PRO puede unirse a la red como dispositivos finales.
-%\end{itemize}
-%
-%\subsection{Características}
-%
-%\paragraph*{Confianza} A pesar de que las redes wireless son poco confiables donde factores como el ambiente, altura, ubicación representan problemas de comunicación a causa de una recepción pobre. ZigBee provee mediante protocolos (IEEE 802.15.4, CSMA-CA, etc) confianza en la red. Para aumentar la misma ZigBee implementa un CSMA-CA (\emph{Carries Sense Multiple Access Collition Avoidance}) que establece el proceso de comunicación: antes de transmitir ZigBee escucha el canal, cuando el canal esta claro ZigBee comienza a transmitir.
-%=======
 
 ZigBee es  un conjunto de especificaciones de protocolos estándar, abiertos y globales para la comunicación inalámbrica. Se basa en el estándar IEEE 802.15.04 de redes inalámbricas de área personal (WPAN). Es considerada como la tecnología barata para la comunicación inalámbrica.
 
@@ -587,6 +578,35 @@ Zigbee provee encriptación donde los paquetes no pueden ser entendidos por nodo
 
 \section{ZigBee Alliance}
  
+  Conformada por más de 270 compañías, la \emph{ZigBee Alliance} es un consorcio que promueve el estándar ZigBee para sensores inalámbricos y dispositivos de red de baja potencia y velocidad. La ZigBee Alliance también especifica conjuntos de pruebas con casos para probar que fuerzan a la compatibilidad entre proveedores. Para que los proveedores reciban la certificación ZigBee Alliance Platform (ZCP) necesitan pasar por un proceso riguroso de test. También la ZigBee Alliance regularmente organiza un evento para motivar a los proveedores a crear una comunidad cercana donde se comparten ideas para que las plataformas de cada uno sean compatibles entre si.
+  
+  En adición a la compatibilidad entre proveedores, ZigBee Alliance tambien define la compatibilidad del nivel de aplicación entre los perfiles de las mismas. Una perfil de aplicación define como varias aplicaciones se conectan y trabajan juntas como por ejemplo switches y luces, dispositivos remotos y televisión. También especifica el conjunto de pruebas para cada compatibilidad al rededor de las aplicaciones de diferentes proveedores, con el fin de que una red ZigBee pueda tener muchos productos de diferentes proveedores de forma incorporada.
+  
+  
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm]{redZigbee}
+    \caption{Diferentes proveedores trabajando en una red ZigBee, tomado de [1]}
+    \label{fig:device-architecture}
+\end{figure}
+ 
+  Un ejemplo: \emph{"Se tiene el control a distancia, con un solo toque, atenúa las luces Philips (y las
+enfriar a un tono cálido), disminuye las sombras del Somfy Glystro, enciende la pantalla Panasonic
+ y el reproductor de DVD Sony y comienza la película. Cada uno de estos contiene radios ZigBee de diferentes proveedores: Freescale, Texas Instruments,Renesas, Ember y ST Microelectronics}.[1]"
+  
+ Entonces, se puede decir que la ZigBee Alliance ofrece al consumidor diferentes opciones de proveedores. Al haber colaboración alguien ya pudo haber escrito el código necesario para el producto en si, o un proveedor de hardware que ya haya creado una plataforma lista para ser consumida y entrar mas rápido en el mercado, en vez de construir todo desde cero e invirtiendo en desarrollo.  
+ 
+ Se puede llegar a ser un aliado de ZigBee, existen tres tipos de aliado: promotor, participante y un adoptante. 
+ Para se un promotor otros promotores lo tienen que aprobar. Los promotores obtienen la primera selección de la ubicación pueden exponer sus productos en las ferias comerciales, se les ofrece el patrocinio de eventos, y reciben  el derecho a votar en todas las propuestas.
+ Los participantes, junto con los Promotores, son miembros de la ZigBee Alliance que en conjunto desarrollan la 
+ especificación ZigBee. Ellos votan sobre todas las especificaciones que existan en ZigBee. Los adoptantes constituyen la mayor parte de los miembros. Estos miembros suelen ser OEMs. Ellos obtienen acceso anticipado a las especificaciones y participación en la solicitud de reuniones de grupo, pero no reciben derechos de voto ni participan activamente en la propia especificación de ZigBee.
+
+La especificación ZigBee ha sufrido varias modificaciones desde la publicación de la primera especificación en el 2004:
+\begin{itemize}
+    \item En el 2004, la \emph{ZigBee Alliance} publica la primera especificación, la cual daba soporte a un perfil de iluminación de control doméstico. Sin embargo, la \emph{Zigbee Alliance} ya no da soporte a la especificación del 2004.
+    \item En Febrero del 2006, la \emph{ZigBee Alliance} publicón el \emph{ZigBee Stack 2016}, el cual contenía modificaciones del ZigBee 2004.
+   \item En Octubre del 2007, la \emph{ZigBee Alliance} publica dos conjuntos de funcionalidades llamados ZigBee y ZigBee PRO. El conjunto de funcionalidad ZigBee es interoperable con ZigBee PRO. Si una red está basada en el ZigBee PRO, los dispostivos de ZigBee pueden unirse a la red como dispositivos finales (\emph{end devices}). De la misma forma si una red está basada en ZigBee, los dispositivos ZigBee PRO puede unirse a la red como dispositivos finales.
+\end{itemize}
 
 \section{Red ZigBee}
 \subsection{Estándar 802.15.4}
@@ -599,10 +619,6 @@ El estándar establece dos formas de diseñar redes: \emph{peer-to-peer} y de es
 El atractivo de ZigBee es la confianza que brinda a pesar que construye una red inalámbrica. Parte del porqué es la implementación del estándar IEEE 802.15.4. Al ser un estándar hay certificaciones de dicho estándar y de ZigBee lo cual le brinda a la comunidad un ambiente robusto para el desarrollo de este tipo de redes.
 
 También ZigBee implementa una solución de dos SAPs por capa una para los datos y otra para la administración, esto según las especificaciones del protocolo 802.15.4, lo mismo ocurre en las capas inferiores MAC y física donde se define un radio de 2.4 GHz como base de las comunicaciones que permite, por ejemplo un nodo que controla o monitorea un grupo de interruptores solo va a necesitar un radio 802.15.4. (SAPs).
-
-\subsection{Tipos de Red}
-
-\textbf{Priscilla lo hace}
 
 \subsection{Tipos de dispositivos}
 Una red ZigBee consiste de nodos ZigBee (dispositivos). La arquitectura de un nodo se muestra en la figura \ref{fig:device-architecture}. Un nodo consiste de un microcontrolador, un tranceptor (\emph{transciver}) y una antena. Un nodo ZigBee usa conjuntos de perfiles los cuales son desarrollados en software. Un nodo puede ser usado para una amplia variedad de aplicaciones, por ejempo, control de la iluminación, detectores de humo y monitoreo doméstico de seguridad. Por lo tanto, un nodo puede soportar múltiples subunidades y cada subunidad tiene un objecto de aplicación que describe la función de la subunidad. Un nodo puede operar ya sea como un FFD o como un RFD. Un FFD puede realizar todas las tareas que están definidades por el estándar ZigBee y, opera en todo el conjunto de la capa MAC de IEEE 802.15.4. Un RFD realiza solo un número limitado de tareas.
@@ -898,10 +914,10 @@ ZigBee esta bien posicionado en el área de sensores inalámbricos y control de 
 
 \section{Conclusion}
 
-[La Conclusion]
 
+Con el paso del tiempo ZigBee y la ZigBee Alliance a crecido de tal forma que no se puede dudar de que que pionero y líder en plataformas inalámbricas de conectividad entre dispositivos. También ZigBee se ha fijado la meta de cumplir con características como seguridad, bajo costo, homogeneidad entre otras que la convierten en atractivo para empresas y consumidores. 
 
-
+El estándar de ZigBee establece un esquema para la red de comunicaciones, la seguridad mediante diferentes estándares, y los servicios de apoyo para aplicaciones que operan encima de la capa IEEE 802.15.4, el Control (MAC) y la capa física (PHY) , todo esto con el fin de brindar  una topología de red variada donde se pueden desarrollar diferentes tipos de aplicación. 
 
 
 % if have a single appendix:
@@ -1030,5 +1046,3 @@ es Ingeniero en Informática de la Universidad Nacional. Actualmente, realiza su
 
 % that's all folks
 \end{document}
-
-
