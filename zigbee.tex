@@ -586,7 +586,7 @@ Zigbee provee encriptación donde los paquetes no pueden ser entendidos por nodo
   \begin{figure}[h]
     \centering
     \includegraphics[width=8cm]{redZigbee}
-    \caption{Diferentes proveedores trabajando en una red ZigBee, tomado de [1]}
+    \caption{Diferentes proveedores trabajando en una red ZigBee, tomado de \cite{gislason}}
     \label{fig:device-architecture}
 \end{figure}
  
@@ -626,7 +626,7 @@ Una red ZigBee consiste de nodos ZigBee (dispositivos). La arquitectura de un no
 \begin{figure}[h]
     \centering
     \includegraphics[width=8cm]{device-architecture}
-    \caption{Arquitectura de un nodo ZigBee}
+    \caption{Arquitectura de un nodo ZigBee. Tomado de \cite{gshewender}}
     \label{fig:device-architecture}
 \end{figure}
 
@@ -660,14 +660,14 @@ Se utiliza una jerarquía de asociación; un dispositivo que se une a la red pue
     \begin{figure}[h]
         \centering
         \includegraphics[width=7.5cm]{star-topology}
-        \caption{Topología de estrella}
+        \caption{Topología de estrella. Tomado \cite{gshewender}}
         \label{fig:star-topology}
     \end{figure}
     \item \textbf{Topología de árbol:} En esta topología, la red consiste de un nodo central (nodo raíz), el cual es un coordinador, varios \emph{routers} y dispositivos finales tal y como se muestra en la figura \ref{fig:tree-topology}. La función del \emph{router} es la de extender la cobertura de la red. Los nodos finales que están conectados al coordinador o a los \emph{routers} se les llama \emph{children}. Solamente los \emph{routers} y el coordinador pueden tener  hijos \emph{children}. Cada dispositivo final está solamente en la capacidad de comunicarse con su padre (\emph{router} o coordinador). El coordinador y los \emph{routers} puede tener hijos y, por tanto, son los únicos dispositivos que pueden ser padres. Un dispositivo final no puede tener hijos y por lo tanto, no puede ser un padre. Un caso especial de topología de árbol es la llamada topología \emph{cluster tree}.
     \begin{figure}[h]
         \centering
         \includegraphics[width=7.5cm]{tree-topology}
-        \caption{Topología de árbol}
+        \caption{Topología de árbol. Tomado de \cite{gshewender}}
         \label{fig:tree-topology}
     \end{figure}    
     Las desventajas de una topología de árbol son:
@@ -679,14 +679,14 @@ Se utiliza una jerarquía de asociación; un dispositivo que se une a la red pue
     \begin{figure}[h]
         \centering
         \includegraphics[width=7.5cm]{cluster-tree-topology}
-        \caption{Topología \emph{cluster tree}}
+        \caption{Topología \emph{cluster tree}. Tomado de \cite{gshewender}}
         \label{fig:cluster-tree-topology}
     \end{figure}
     \item \textbf{Topología de malla:}  la topología de malla, también conocida como una red punto-a-punto, consiste de un coordinador, varios \emph{routers} y dispositivos finales, como se muestra en la figura \ref{fig:mesh-topology}.
     \begin{figure}[h]
         \centering
         \includegraphics[width=7.5cm]{mesh-topology}
-        \caption{Topología de malla}
+        \caption{Topología de malla. Tomado de \cite{gshewender}}
         \label{fig:mesh-topology}
     \end{figure}
     Las siguientes son las características de una topología de malla:
@@ -720,7 +720,7 @@ La figura \ref{fig:zigbee-architecture} muestra la arquitectura del protocolo Zi
 \begin{figure}[h]
     \centering
     \includegraphics[width=8cm]{zigbee-architecture}
-    \caption{Arquitectura del protocolo ZigBee}
+    \caption{Arquitectura del protocolo ZigBee. Tomado de \cite{gshewender}}
     \label{fig:zigbee-architecture}
 \end{figure}
 
@@ -770,7 +770,7 @@ Un objeto de aplicación define la entrada y salida del APS. Por ejemplo, un \em
 \begin{figure}[h]
     \centering
     \includegraphics[width=8cm]{home-controlling-lighting}
-    \caption{Control de iluminación doméstico}
+    \caption{Control de iluminación doméstico. Tomado de \cite{gshewender}}
     \label{fig:home-control-ligthing}
 \end{figure}
 
@@ -990,7 +990,7 @@ El estándar de ZigBee establece un esquema para la red de comunicaciones, la se
 
 \begin{thebibliography}{1}
 
-\bibitem{bombal}
+\bibitem{gislason}
 D.~Gislason. \emph{Zigbee Wireless Networking}. \hskip 1em plus 0.5em minus 0.4em\relax Elsevier. ISBN: 978-0-7506-85979. 2008.
 
 
